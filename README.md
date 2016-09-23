@@ -1,23 +1,23 @@
 Fast Versioning
 ===========
-PaperTrail extension for seamless fast key/value versioning of individual object attributes, which can be queried.
+A [PaperTrail](https://github.com/airblade/paper_trail) extension for seamless fast key/value versioning of individual object attributes, which can be queried.
 
 ### Why?
 
-PaperTrail stores version changes in one serialized column, which is great for keeping backups, undoing, etc. For querying and searching this is a real pain to use, and sometimes you need to track single column changes that you can query / use for statistics / check last change fast, and - another benefit - you can track more complex object state changes!
+PaperTrail stores version changes in one serialized column, which is great for keeping backups, undoing, etc. For querying and searching this is a real pain to use, and sometimes you need to track single column changes that you can query, use for statistics, quickly check last changes. You can also use Fast Versioning to track more complex object state changes!
 
 ### How?
-We hook up to PaperTrail version creation, check if a given object value changed (can be a method too) and store this single change that is not easily accessible and can be queried.
+We hook up to PaperTrail version creation, check if an object's tracked attribute changed and store any changes individually.
 
 Installation
 ------------
-1. add to the Gemfile and bundle
+1. Add to the Gemfile and bundle
 ```ruby
-    gem 'fast_versioning'
+gem 'fast_versioning'
 ```
-2. install migrations
+2. Install migrations
 ```shell
-    rake fast_versioning:install:migrations
+rake fast_versioning:install:migrations
 ```
 
 Configuration
@@ -25,18 +25,23 @@ Configuration
 1. Include the concern in your model
 
 ```ruby
-    include FastVersioning::FastVersioned
-    has_paper_trail
+include FastVersioning::FastVersioned
+has_paper_trail
 
     ...
-    # define what do you want to track
-    has_fast_versions :plan_id,
-                      :plan_type,
-                      status: { billed_statements: Proc.new { |account| account.utility_statements.count }, static_value: 'text' }
+# define what you want to track
+has_fast_versions(
+  :plan_id,
+  :plan_type,
+  status: {
+    billed_statements: Proc.new { |account| account.utility_statements.count },
+    static_value: 'text'
+  }
+)
 
-    # plan_id - is a attribute
-    # plan_type - is a custom method
-    # status - defines an additional serialized meta apart from storing property change
+# plan_id - is a attribute
+# plan_type - is a custom method
+# status - defines an additional serialized meta apart from storing property change
 ```
 
 Usage
