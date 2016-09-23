@@ -60,3 +60,5 @@ Usage
     # query
     your_model.fast_versions_for(:status).where(value: 'active').where(prev_value: 'incomplete')
 ```
+
+An [Arcadia Power](http://www.arcadiapower.com) Project

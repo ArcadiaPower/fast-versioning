@@ -4,11 +4,12 @@ $:.push File.expand_path("../lib", __FILE__)
 Gem::Specification.new do |s|
   s.name        = "fast_versioning"
   s.version     = '0.1.0'
-  s.authors     = ['Arcadia Power']
-  s.email       = ['info@arcadiapower.com']
-  s.homepage    = 'http://www.arcadiapower.com'
+  s.authors     = ['Arcadia Power', 'Iwo Dziechciarow']
+  s.email       = ['engineering@arcadiapower.com']
+  s.homepage    = 'https://github.com/ArcadiaPower/fast-versioning'
   s.summary     = 'Fast versioning extension for paper_trail'
   s.description = 'Fast versioning extension for paper_trail'
+  s.license     = 'MIT'
 
   s.files = Dir['{app,config,db,lib}/**/*', 'Rakefile', 'README.md']
 
