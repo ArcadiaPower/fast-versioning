@@ -32,6 +32,7 @@ describe 'fast_versioned' do
 
     PaperTrail.enabled = true
     PaperTrail.enabled_for_controller = true
+    PaperTrail.config.track_associations = false
 
     PaperTrail::Version.module_eval do
       include FastVersioning::PaperTrailExtensions
