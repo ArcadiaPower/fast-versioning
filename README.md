@@ -20,6 +20,17 @@ gem 'fast_versioning'
 rake fast_versioning:install:migrations
 ```
 
+Prerequisites
+-------------
+- PaperTrail needs to be added to your model
+- Storing changes needs to be enabled for PaperTrail
+- Attributes tracked with FastVersioning need to also be present in PaperTrail
+ie.
+```ruby
+has_paper_trail only: :status
+has_fast_versions :status
+```
+
 Configuration
 -------------
 1. Include the concern in your model
@@ -46,8 +57,21 @@ has_fast_versions(
 
 Usage
 -----
+### Creating and recreating fast versions
+FastVersioning versions are created based on the `PaperTrail::Version` instance. When available, the `changeset` is used, otherwise, FastVersioning will attempt to `reify` the object comparing the changes for the tracked columns.
 
-### samples
+At any point you can retroactively recreate FastVersioning versions (especially, initially, when adding fast versions to existing PaperTrail configuration, or when adding/changing FastVersioning options for a model), to do so you need to call the `recreate_fast_versions!` on the `PaperTrail::Version` instance. It will destroy all previous fast versions if they exist and recreate them.
+
+Example usage:
+```ruby
+    # recreate fast versions for a single model instance
+    your_model.versions.find_each(&:recreate_fast_versions!)
+
+    # recreate fast versions for all model instances
+    YourModel.find_each { |your_model| your_model.versions.find_each(&:recreate_fast_versions!) }
+```
+
+### Querying
 ```ruby
     your_model.fast_versions # get all fast versions
     your_model.fast_versions_for(:plan_type) # get fast versions for given property - chain
