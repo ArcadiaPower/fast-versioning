@@ -12,19 +12,24 @@ module FastVersioning
         value_change = FastVersioning::ValueChange.new(version: self)
 
         item.send(:fast_version_for).each do |tracked_attribute|
-          if value_change.value_was(tracked_attribute.name) != value_change.value_became(tracked_attribute.name)
-            fast_versions.create(
-              item_id: item_id,
-              item_type: item_type,
-              whodunnit_id: whodunnit.to_i,
-              whodunnit_type: whodunnit_type,
-              name: tracked_attribute.name,
-              value: value_change.value_became(tracked_attribute.name),
-              prev_value: value_change.value_was(tracked_attribute.name),
-              meta: tracked_attribute.meta,
-              created_at: created_at
-            )
-          end
+          name = tracked_attribute.name
+          new_value = value_change.value_became(name)
+          prev_value = value_change.value_was(name)
+
+          # Skip if value unchanged.
+          next if prev_value == new_value
+
+          fast_versions.create(
+            item_id: item_id,
+            item_type: item_type,
+            whodunnit_id: whodunnit&.to_i,
+            whodunnit_type: whodunnit_type,
+            name: name,
+            value: new_value,
+            prev_value: prev_value,
+            meta: tracked_attribute.meta,
+            created_at: created_at
+          )
         end
       end
       true

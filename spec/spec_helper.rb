@@ -6,9 +6,6 @@ require 'fast_versioning'
 require 'paper_trail'
 require File.expand_path('app/models/fast_versioning/fast_version.rb')
 
-path = File.expand_path('../support/**/*.rb', __FILE__)
-Dir.glob(path) { |file| require file }
-
 RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
   config.mock_with :rspec
@@ -17,4 +14,8 @@ RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = :expect
   end
+
+  PaperTrail.enabled = true
+  PaperTrail.enabled_for_controller = true
+  PaperTrail.config.track_associations = false
 end
