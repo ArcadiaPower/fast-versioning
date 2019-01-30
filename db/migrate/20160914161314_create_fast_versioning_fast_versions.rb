@@ -1,4 +1,4 @@
-class CreateFastVersioningFastVersions < ActiveRecord::Migration[4.2]
+class CreateFastVersioningFastVersions < ActiveRecord::Migration[5.0]
   def change
     create_table :fast_versioning_fast_versions do |t|
       t.references :item, polymorphic: true, index: { name: 'fast_version_item_index' }
