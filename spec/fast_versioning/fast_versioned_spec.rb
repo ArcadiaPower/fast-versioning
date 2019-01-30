@@ -1,5 +1,4 @@
-require 'spec_helper'
-require File.expand_path('../../../db/migrate/20160914161314_create_fast_versioning_fast_versions.rb', __FILE__)
+require File.expand_path('../../db/migrate/20160914161314_create_fast_versioning_fast_versions.rb', __dir__)
 
 describe 'fast_versioned' do
   before do
@@ -28,10 +27,8 @@ describe 'fast_versioned' do
       CreateFastVersioningFastVersions.new.change
     end
 
+    # Rails would normally automatically load this.
     require 'paper_trail/frameworks/active_record'
-
-    PaperTrail.enabled = true
-    PaperTrail.enabled_for_controller = true
 
     PaperTrail::Version.module_eval do
       include FastVersioning::PaperTrailExtensions
