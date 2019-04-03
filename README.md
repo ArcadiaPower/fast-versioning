@@ -83,6 +83,14 @@ Example usage:
 
     # query
     your_model.fast_versions_for(:status).where(value: 'active').where(prev_value: 'incomplete')
+
+    # alternatively:
+    FastVersioning::FastVersion.find_by(
+      item_type: 'ItemType',
+      name: 'name',
+      value: 'value'
+      prev_value: 'prev_value'
+    )
 ```
 
 An [Arcadia Power](http://www.arcadiapower.com) Project
