@@ -1,4 +1,5 @@
 require File.expand_path('../../db/migrate/20160914161314_create_fast_versioning_fast_versions.rb', __dir__)
+require File.expand_path('../../db/migrate/20190514134359_add_unique_index_to_version_id_name', __dir__)
 
 describe 'fast_versioned' do
   before do
@@ -25,6 +26,7 @@ describe 'fast_versioned' do
       end
 
       CreateFastVersioningFastVersions.new.change
+      AddUniqueIndexToVersionIdName.new.change
     end
 
     # Rails would normally automatically load this.
