@@ -4,8 +4,6 @@ module FastVersioning
     belongs_to :whodunnit, polymorphic: true
     belongs_to :version, class_name: 'PaperTrail::Version'
 
-    validates :version_id, uniqueness: { scope: :name }
-
     serialize :meta, JSON
   end
 end
