@@ -15,5 +15,6 @@
 
 .idea
 *.gem
-
-Gemfile.lock
+*.lock
+gemfiles/.bundle/
+.DS_Store
