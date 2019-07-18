@@ -2,7 +2,7 @@ require File.expand_path('../../db/migrate/20160914161314_create_fast_versioning
 require File.expand_path('../../db/migrate/20190514134359_add_unique_index_to_version_id_name', __dir__)
 
 describe 'fast_versioned' do
-  before do
+  before(:all) do
     ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
     ActiveRecord::Migration.verbose = false
     ActiveRecord::Schema.define do
@@ -40,15 +40,24 @@ describe 'fast_versioned' do
       has_paper_trail
       include FastVersioning::FastVersioned
 
-      has_fast_versions :status,
-                        :number,
-                        complex: { store_me: Proc.new { |dummy_model| dummy_model.get_value },
-                                   other_thing: 'some string' }
+      has_fast_versions(
+        :status,
+        :number,
+        complex: {
+          store_me: Proc.new { |dummy_model| dummy_model.get_value },
+          other_thing: 'some string'
+        }
+      )
 
       def get_value
         versions.count
       end
     end
+  end
+
+  before do
+    PaperTrail::Version.destroy_all
+    FastVersioning::FastVersion.destroy_all
   end
 
   describe 'injects associations to model' do
