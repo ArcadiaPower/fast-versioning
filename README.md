@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ArcadiaPower/fast-versioning.svg?branch=master)](https://travis-ci.org/ArcadiaPower/fast-versioning)
+
 Fast Versioning
 ===========
 A [PaperTrail](https://github.com/airblade/paper_trail) extension for seamless fast key/value versioning of individual object attributes, which can be queried.
@@ -91,6 +93,13 @@ Example usage:
       value: 'value'
       prev_value: 'prev_value'
     )
+```
+
+Testing
+-------------
+```
+bundle exec appraisal install
+bundle exec appraisal rspec
 ```
 
 An [Arcadia Power](http://www.arcadiapower.com) Project
