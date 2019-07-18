@@ -19,7 +19,7 @@ appraise 'ar-5.1_pt-5.0' do
 end
 
 appraise 'ar-5.1_pt-10.3' do
-  gem 'activerecord', '~> 5.1'
+  gem 'activerecord', '~> 5.1.0'
   gem 'paper_trail', '~> 10.3'
 end
 
