@@ -16,6 +16,4 @@ RSpec.configure do |config|
   end
 
   PaperTrail.enabled = true
-  PaperTrail.enabled_for_controller = true
-  PaperTrail.config.track_associations = false
 end
