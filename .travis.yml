@@ -19,6 +19,8 @@ gemfile:
   - gemfiles/ar_5.0_pt_5.0.gemfile
   - gemfiles/ar_5.1_pt_4.0.gemfile
   - gemfiles/ar_5.1_pt_5.0.gemfile
+  - gemfiles/ar_5.1_pt_10.3.gemfile
+  - gemfiles/ar_5.2_pt_10.3.gemfile
 matrix:
   allow_failures:
     - rvm: ruby-head
