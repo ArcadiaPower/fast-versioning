@@ -95,6 +95,23 @@ Example usage:
     )
 ```
 
+### Timeline helper
+`FastVersioning::Timeline` is a simple helper you can use to generate a timeline hash for a tracked property
+
+example usage:
+```ruby
+FastVersioning::Timeline.new(
+  fast_versions: model.fast_versions,
+  name: "status"
+).to_h
+
+# {
+#   Thu, 01 Apr 2021 14:08:48 EDT -04:00..Mon, 05 Apr 2021 21:53:48 EDT -04:00 => 'active',
+#   Mon, 05 Apr 2021 21:53:48 EDT -04:00..Mon, 05 Apr 2021 22:02:44 EDT -04:00 => 'inactive',
+#   Mon, 05 Apr 2021 22:02:44 EDT -04:00..Infinity => 'active'
+# }
+```
+
 Testing
 -------------
 ```
@@ -102,4 +119,4 @@ bundle exec appraisal install
 bundle exec appraisal rspec
 ```
 
-An [Arcadia Power](http://www.arcadiapower.com) Project
+An [Arcadia](http://www.arcadia.com) Project
