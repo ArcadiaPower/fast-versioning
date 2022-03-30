@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ArcadiaPower/fast-versioning.svg?branch=master)](https://travis-ci.org/ArcadiaPower/fast-versioning)
+[![CI Status](https://github.com/ArcadiaPower/fast-versioning/workflows/CI/badge.svg?branch=master)](https://github.com/ArcadiaPower/fast-versioning/actions?query=workflow%3ACI+branch%3Amaster)
 
 Fast Versioning
 ===========
